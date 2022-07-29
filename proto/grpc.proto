@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+option java_package = "com.zeptolab.analytics.arcade.protocol";
+option java_multiple_files = true;
+option go_package = "analytics/pb";
+
+service RouteAnalyticsService {
+  rpc SessionStartedEvent(SessionStartedEventRequest) returns (SessionStartedEventResponse);
+  rpc StageCompletedEvent(StageCompletedEventRequest) returns (StageCompletedEventResponse);
+
+  // FOR TESTING ONLY
+  rpc IsAlive(IsAliveRequest) returns (IsAliveResponse);
+}
+
+message IsAliveRequest {
+
+}
+message IsAliveResponse {
+
+}
+
+message SessionStartedEventRequest {
+  bytes event_id = 1; // expecting UUID (16 bytes)
+
+  int64 datetime = 2;
+  bool new_user = 3;
+  int32 session_count = 4;
+}
+
+message SessionStartedEventResponse {
+
+}
+
+message StageCompletedEventRequest {
+  bytes event_id = 1; // expecting UUID (16 bytes)
+
+  int64 datetime = 2;
+  string stage_id = 3;
+  int32 attempts = 4;
+  string game_mode = 5;
+  int32 session_count = 6;
+  int32 all_stars = 7;
+  int32 basic_stars = 8;
+  int32 prev_all_stars = 9;
+  int32 prev_basic_stars = 10;
+  bool first_success = 11;
+  bool is_bonus = 12;
+  int32 active_days = 13;
+  int32 max_chapter = 14;
+  int32 basic_completion = 15;
+  int32 stars_completion = 16;
+  int32 game_completion = 17;
+  int32 event_completion = 18;
+  int32 event_full_completion = 19;
+  int32 event_stamps = 20;
+}
+message StageCompletedEventResponse {
+
+}
