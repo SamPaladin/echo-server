@@ -2,6 +2,7 @@ package main
 
 import (
 	pb "analytics/server/analytics/pb"
+	"os"
 	"context"
 	"log"
 	"net"
@@ -52,12 +53,18 @@ func (s *server) StageCompletedEvent(ctx context.Context, in *pb.StageCompletedE
 }
 
 func main() {
-	listener, err := net.Listen("tcp", ":8080")
+	// Heroku determines the port via env var
+	port := os.Getenv("PORT")
+	if port == "" {
+        port = "8080"
+    }
+
+	listener, err := net.Listen("tcp", ":" + port)
 	if err != nil {
 		panic(err)
 	}
 
-	log.Printf("Started Analytics server DEV environment")
+	log.Printf("Started Analytics server DEV environment on port " + port)
 
 	s := grpc.NewServer()
 	reflection.Register(s)
