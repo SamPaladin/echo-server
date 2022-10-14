@@ -18,9 +18,15 @@ go install http://google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
 
 Project has a Makefile but is not yet working completely: 
 
-#### To generate protobufers (not needed if there are no new changes) this command still fails. You can maybe run it locally.
+#### To generate protobufers (not needed if there are no new changes)
 ```
 make gen-protobuf
+```
+
+>Note if the previous command fail might be due to not having environment variables not properly defined. Please refer to this guide: ?>https://grpc.io/docs/languages/go/quickstart/ but basically you can run this: 
+
+```
+export PATH="$PATH:$(go env GOPATH)/bin"
 ```
 #### To build 
 ```
