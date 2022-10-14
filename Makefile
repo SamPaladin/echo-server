@@ -10,6 +10,9 @@ build-osx:
 build-windows:
 	GOARCH=386 GOOS=window go build -o ${BINARY_NAME}-windows main.go
 
+build-heroku:
+	GOOS=linux GOARCH=amd64 go build -o bin/${BINARY_NAME} -v main.go
+
 run-server:
 	./build/$(BINARY_NAME)-osx
 
